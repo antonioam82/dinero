@@ -10,13 +10,18 @@ def valid_password(c):
     return c
         
 contraseña=pickle.load(open("contraseña.mio","rb"))
-opcion=input("Escribir\'A\'para acceder mediante la contraseña.Escribir\'B\'para modificar contraseña: ")
+print("*********ACCESO POR CONTRASEÑA*********")
+print("¿Que desea hacer:")
+print("A)Acceder mediante contraseña actual")
+print("B)Cambiar contraseña actual")
+opcion=input("Escriba aquí su opción: ")
 while opcion!=("A") and opcion!=("B"):
     opcion=input("Escriba solo \'A\' o \'B\' según su opción: ")
 if opcion==("A"):
     contra=input("Introduce contraseña: ")
     while contra!=contraseña:
         print(chr(7));contra=input("Contraseña incorrecta: ")
+
 else:
     contra=input("Introduce contraseña actual: ")
     while contra!=contraseña:
@@ -27,7 +32,7 @@ else:
 subprocess.call(["cmd.exe","/C","cls"])
 
 while True:
-    print("SALDO")
+    print("***BIENVENIDO AL GESTOR DE TU DINERO***")
     saldo=pickle.load(open("dinero.mio","rb"))
     print("¿Que desea hacer?:")
     print("A)Ver saldo actual.")
@@ -66,6 +71,6 @@ while True:
         subprocess.call(["cmd.exe","/C","cls"])
         
             
-        
+
     
 
