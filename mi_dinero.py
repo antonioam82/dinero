@@ -2,6 +2,20 @@ from VALID import ns, OK
 import pickle
 import subprocess
 
+moneda=pickle.load(open("divisa.mio","rb"))
+if moneda==(" "):
+    divisa=input("Introduce divisa: ")
+    pickle.dump(divisa,open("divisa.mio","wb"))
+
+
+def moneda(n):
+    moneda=pickle.load(open("divisa.mio","rb"))
+    if n==1:
+        Moneda=moneda
+    else:
+        Moneda=moneda+"s"
+    return Moneda
+
 def valid_password(c):
     if len(c)<5 or len(c)>18:
         c=valid_password(input("La contraseña ha de tener entre 5 y 18 caracteres: "))
@@ -61,7 +75,7 @@ while True:
         saldo[0]=saldo[0]+DIN
         if op==("B"):
             pickle.dump(saldo,open("dinero.mio","wb"))
-            print("El saldo, ahora, es de",saldo[0],"euros")
+            print("El saldo, ahora, es de",saldo[0],moneda(saldo[0]))
         else:
             print("Tras la operación simulada su saldo sería de",saldo[0],"euros")
     c=ns(input("¿Desea continuar?: "))
@@ -70,7 +84,6 @@ while True:
     else:
         subprocess.call(["cmd.exe","/C","cls"])
         
-            
 
     
 
