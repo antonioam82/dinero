@@ -56,7 +56,7 @@ while True:
     while op!=("A") and op!=("B") and op!=("C"):
         op=input("Escriba solo \'A\', \'B\' o \'C\' según su opción: ")
     if op==("A"):
-        print("Su saldo actual es de",saldo[0],"euros")
+        print("Su saldo actual es de",saldo[0],moneda(saldo[0]))
     else:
         oper=("")
         DIN=0
@@ -77,13 +77,10 @@ while True:
             pickle.dump(saldo,open("dinero.mio","wb"))
             print("El saldo, ahora, es de",saldo[0],moneda(saldo[0]))
         else:
-            print("Tras la operación simulada su saldo sería de",saldo[0],"euros")
+            print("Tras la operación simulada su saldo sería de",saldo[0],moneda(saldo[0]))
     c=ns(input("¿Desea continuar?: "))
     if c==("n"):
         break
     else:
         subprocess.call(["cmd.exe","/C","cls"])
         
-
-    
-
