@@ -13,7 +13,11 @@ def moneda(n):
     if n==1:
         Moneda=moneda
     else:
-        Moneda=moneda+"s"
+        Moneda=list(moneda)
+        if Moneda[-1]==("a") or Moneda[-1]==("e") or Moneda[-1]==("i") or Moneda[-1]==("u") or Moneda[-1]==("o"):
+            Moneda=moneda+"s"
+        else:
+            Moneda=moneda+"es"
     return Moneda
 
 def valid_password(c):
@@ -25,9 +29,11 @@ def valid_password(c):
         
 contraseña=pickle.load(open("contraseña.mio","rb"))
 print("*********ACCESO POR CONTRASEÑA*********")
+print("")
 print("¿Que desea hacer:")
 print("A)Acceder mediante contraseña actual")
 print("B)Cambiar contraseña actual")
+print("")
 opcion=input("Escriba aquí su opción: ")
 while opcion!=("A") and opcion!=("B"):
     opcion=input("Escriba solo \'A\' o \'B\' según su opción: ")
@@ -48,39 +54,48 @@ subprocess.call(["cmd.exe","/C","cls"])
 while True:
     print("***BIENVENIDO AL GESTOR DE TU DINERO***")
     saldo=pickle.load(open("dinero.mio","rb"))
+    print("")
     print("¿Que desea hacer?:")
     print("A)Ver saldo actual.")
     print("B)Introducir cambios en el saldo.")
     print("C)Realizar simulación.")
+    print("D)Cambiar de moneda.")
+    print("")
     op=input("Introduzca aquí su opción: ")
-    while op!=("A") and op!=("B") and op!=("C"):
+    while op!=("A") and op!=("B") and op!=("C") and op!=("D"):
         op=input("Escriba solo \'A\', \'B\' o \'C\' según su opción: ")
     if op==("A"):
         print("Su saldo actual es de",saldo[0],moneda(saldo[0]))
     else:
-        oper=("")
-        DIN=0
-        if op==("C"):
-            print("SIMULACION")
-        while oper!=("="):
-            oper=input("Introduce tipo de operación: ")
-            while oper!=("+") and oper!=("-") and oper!=("="):
-                oper=input("Escribe \'+\',\'-\' o \'=\' según el tipo de operación que dese realizar: ")
-            if oper==("+"):
-                euros=OK(input("Introduce cantidad: "))
-                DIN+=euros
-            if oper==("-"):
-                euros=OK(input("Introduzca cantidad: "))
-                DIN-=euros
-        saldo[0]=saldo[0]+DIN
-        if op==("B"):
-            pickle.dump(saldo,open("dinero.mio","wb"))
-            print("El saldo, ahora, es de",saldo[0],moneda(saldo[0]))
+        if op==("D"):
+            divisa=input("Introduce nueva divisa: ")
+            pickle.dump(divisa,open("divisa.mio","wb"))
         else:
-            print("Tras la operación simulada su saldo sería de",saldo[0],moneda(saldo[0]))
+            oper=("")
+            DIN=0
+            if op==("C"):
+                print("SIMULACION")
+            while oper!=("="):
+                oper=input("Introduce tipo de operación: ")
+                while oper!=("+") and oper!=("-") and oper!=("="):
+                    oper=input("Escribe \'+\',\'-\' o \'=\' según el tipo de operación que dese realizar: ")
+                if oper==("+"):
+                    euros=OK(input("Introduce cantidad: "))
+                    DIN+=euros
+                if oper==("-"):
+                    euros=OK(input("Introduzca cantidad: "))
+                    DIN-=euros
+            saldo[0]=saldo[0]+DIN
+            if op==("B"):
+                pickle.dump(saldo,open("dinero.mio","wb"))
+                print("El saldo, ahora, es de",saldo[0],moneda(saldo[0]))
+            else:
+                print("Tras la operación simulada su saldo sería de",saldo[0],moneda(saldo[0]))
+            
     c=ns(input("¿Desea continuar?: "))
     if c==("n"):
         break
     else:
         subprocess.call(["cmd.exe","/C","cls"])
         
+            
