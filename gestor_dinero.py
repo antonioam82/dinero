@@ -1,5 +1,6 @@
 from VALID import ns, OK
 import pickle
+import time
 import subprocess
 
 moneda=pickle.load(open("divisa.mio","rb"))
@@ -28,31 +29,38 @@ def valid_password(c):
     return c
         
 contraseña=pickle.load(open("contraseña.mio","rb"))
-print("*********ACCESO POR CONTRASEÑA*********")
-print("")
-print("¿Que desea hacer:")
-print("A)Acceder mediante contraseña actual")
-print("B)Cambiar contraseña actual")
-print("")
-opcion=input("Escriba aquí su opción: ")
-while opcion!=("A") and opcion!=("B"):
-    opcion=input("Escriba solo \'A\' o \'B\' según su opción: ")
-if opcion==("A"):
-    contra=input("Introduce contraseña: ")
-    while contra!=contraseña:
-        print(chr(7));contra=input("Contraseña incorrecta: ")
-
-else:
-    contra=input("Introduce contraseña actual: ")
-    while contra!=contraseña:
-        contra=input("Contraseña no válida: ")
-    nueva_contra=valid_password(input("Introduce nueva contraseña: "))
-    contraseña=nueva_contra
+print("*****************ACCESO POR CONTRASEÑA*****************")
+if contraseña==(" "):
+    time.sleep(1)
+    print("ANTES DE EMPEZAR DEBES ESTABLECER UNA CONTRASEÑA")
+    contraseña=valid_password(input("Establecer contraseña: "))
     pickle.dump(contraseña,open("contraseña.mio","wb"))
-subprocess.call(["cmd.exe","/C","cls"])
+    subprocess.call(["cmd.exe","/C","cls"])
+else:
+    print("")
+    print("¿Que desea hacer:")
+    print("A)Acceder mediante contraseña actual")
+    print("B)Cambiar contraseña actual")
+    print("")
+    opcion=input("Escriba aquí su opción: ")
+    while opcion!=("A") and opcion!=("B"):
+        opcion=input("Escriba solo \'A\' o \'B\' según su opción: ")
+    if opcion==("A"):
+        contra=input("Introduce contraseña: ")
+        while contra!=contraseña:
+            print(chr(7));contra=input("Contraseña incorrecta: ")
+
+    else:
+        contra=input("Introduce contraseña actual: ")
+        while contra!=contraseña:
+            contra=input("Contraseña no válida: ")
+        nueva_contra=valid_password(input("Introduce nueva contraseña: "))
+        contraseña=nueva_contra
+        pickle.dump(contraseña,open("contraseña.mio","wb"))
+    subprocess.call(["cmd.exe","/C","cls"])
 
 while True:
-    print("***BIENVENIDO AL GESTOR DE TU DINERO***")
+    print("***********BIENVENIDO AL GESTOR DE SU DINERO***********")
     saldo=pickle.load(open("dinero.mio","rb"))
     print("")
     print("¿Que desea hacer?:")
@@ -98,4 +106,9 @@ while True:
     else:
         subprocess.call(["cmd.exe","/C","cls"])
         
+            
+        
+    
+
+
             
