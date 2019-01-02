@@ -43,6 +43,11 @@ def resta():
         pickle.dump(din,open("mi_dinero","wb"))
         numero=""
 
+
+def cambiar(n):
+    t[n].config(bg="red")
+    
+
 input_text=IntVar()
 numero=""
 comas=0
@@ -63,7 +68,10 @@ Button(ventana,text="8",bg=co_b,width=4,height=1,command=lambda:num("8")).place(
 Button(ventana,text="9",bg=co_b,width=4,height=1,command=lambda:num("9")).place(x=181,y=288)
 Button(ventana,text=",",bg=co_b,width=27,height=1,command=coma).place(x=21,y=320)
 Button(ventana,text="DESHACER",bg=co_b,width=27,height=1,command=clear).place(x=21,y=352)
-
+t=[]
+bott=Button(ventana,text="SIMULACIÓN",bg="grey",width=15,height=6,command=lambda: cambiar(0))
+t.append(bott)
+bott.place(x=256,y=280)
 Entry(ventana,font=('Arial',20,"bold"),width=21,textvariable=input_text,bd=20,insertwidth=4,bg="light grey",justify="right").place(x=16,y=60)
 clear()
 
