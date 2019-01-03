@@ -8,8 +8,10 @@ ventana.geometry("392x394")
 def clear():
     global din
     global numero
+    global comas
     input_text.set(din[0])
     numero=""
+    comas=0
 
 def coma():
     global numero
@@ -60,6 +62,7 @@ def cambiar(n):
     global simula
     global valor_sim
     global din
+    global comas
     if simula==False:
         t[n].config(bg="light green")
         valor_sim=din[0]
@@ -68,6 +71,7 @@ def cambiar(n):
         t[n].config(bg="grey")
         simula=False
         valor_sim=0
+    comas=0
     
 
 input_text=IntVar()
@@ -100,5 +104,7 @@ Entry(ventana,font=('Arial',20,"bold"),width=21,textvariable=input_text,bd=20,in
 clear()
 
 ventana.mainloop()
+
+
 
 
