@@ -28,31 +28,55 @@ def num(n):
 def suma():
     global din
     global numero
+    global simula
+    global valor_sim
     if numero!="":
-        din[0]=din[0]+float(numero)
-        input_text.set(din[0])
-        pickle.dump(din,open("mi_dinero","wb"))
+        if simula==False:
+            din[0]=din[0]+float(numero)
+            input_text.set(din[0])
+            pickle.dump(din,open("mi_dinero","wb"))
+        else:
+            valor_sim+=float(numero)
+            input_text.set(valor_sim)
         numero=""
-
+        
 def resta():
     global din
     global numero
+    global simula
+    global valor_sim
     if numero!="":
-        din[0]=din[0]-float(numero)
-        input_text.set(din[0])
-        pickle.dump(din,open("mi_dinero","wb"))
+        if simula==False:
+            din[0]=din[0]-float(numero)
+            input_text.set(din[0])
+            pickle.dump(din,open("mi_dinero","wb"))
+        else:
+            valor_sim-=float(numero)
+            input_text.set(valor_sim)
         numero=""
 
 
 def cambiar(n):
-    t[n].config(bg="red")
+    global simula
+    global valor_sim
+    global din
+    if simula==False:
+        t[n].config(bg="light green")
+        valor_sim=din[0]
+        simula=True
+    else:
+        t[n].config(bg="grey")
+        simula=False
+        valor_sim=0
     
 
 input_text=IntVar()
 numero=""
+simula=False
 comas=0
 co_b="grey"
 din=pickle.load(open("mi_dinero","rb"))
+valor_sim=din[0]
 Label(ventana,text="by doubleA",fg="red").place(x=1,y=1)
 Button(ventana,text="SUMAR",bg="grey",width=48,height=2,command=suma).place(x=21,y=153)
 Button(ventana,text="RESTAR",bg="grey",width=48,height=2,command=resta).place(x=21,y=198)
@@ -69,10 +93,12 @@ Button(ventana,text="9",bg=co_b,width=4,height=1,command=lambda:num("9")).place(
 Button(ventana,text=",",bg=co_b,width=27,height=1,command=coma).place(x=21,y=320)
 Button(ventana,text="DESHACER",bg=co_b,width=27,height=1,command=clear).place(x=21,y=352)
 t=[]
-bott=Button(ventana,text="SIMULACIÓN",bg="grey",width=15,height=6,command=lambda: cambiar(0))
+bott=Button(ventana,text="SIMULACIÓN",bg="grey",width=16,height=2,command=lambda: cambiar(0))
 t.append(bott)
-bott.place(x=256,y=280)
+bott.place(x=247,y=270)
 Entry(ventana,font=('Arial',20,"bold"),width=21,textvariable=input_text,bd=20,insertwidth=4,bg="light grey",justify="right").place(x=16,y=60)
 clear()
 
 ventana.mainloop()
+
+
