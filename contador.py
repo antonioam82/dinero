@@ -57,18 +57,36 @@ def resta():
             input_text.set(valor_sim)
         numero=""
 
+def ver():
+    global din
+    global view
+    global numero
+    global valor_sim
+    if view==False:
+        t[-2].config(bg="light green")
+        input_text.set(din[0])
+        view=True
+    else:
+        t[-2].config(bg="grey")
+        if simula==True:
+            input_text.set(valor_sim)
+        else:
+            if numero!="":
+                input_text.set(numero)
+        view=False
 
-def cambiar(n):
+
+def cambiar():
     global simula
     global valor_sim
     global din
     global comas
     if simula==False:
-        t[n].config(bg="light green")
+        t[-1].config(bg="light green")
         valor_sim=din[0]
         simula=True
     else:
-        t[n].config(bg="grey")
+        t[-1].config(bg="grey")
         simula=False
         valor_sim=0
     comas=0
@@ -77,6 +95,7 @@ def cambiar(n):
 input_text=IntVar()
 numero=""
 simula=False
+view=False
 comas=0
 co_b="grey"
 din=pickle.load(open("mi_dinero","rb"))
@@ -111,13 +130,17 @@ Bcoma=Button(ventana,text=",",bg=co_b,width=27,height=1,command=coma).place(x=21
 t.append(Bcoma)
 Bd=Button(ventana,text="DESHACER",bg=co_b,width=27,height=1,command=clear).place(x=21,y=352)
 t.append(Bd)
-bott=Button(ventana,text="SIMULACIÓN",bg="grey",width=16,height=2,command=lambda: cambiar(-1))
+Ba=Button(ventana,text="VALOR ACTUAL",bg=co_b,width=16,height=2,command=ver)
+t.append(Ba)
+Ba.place(x=247,y=325)
+bott=Button(ventana,text="SIMULACIÓN",bg="grey",width=16,height=2,command=cambiar)
 t.append(bott)
 bott.place(x=247,y=270)
 Entry(ventana,font=('Arial',20,"bold"),width=21,textvariable=input_text,bd=20,insertwidth=4,bg="light grey",justify="right").place(x=16,y=60)
 clear()
 
 ventana.mainloop()
+
 
 
 
