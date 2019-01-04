@@ -81,12 +81,15 @@ def cambiar():
     global valor_sim
     global din
     global comas
+    global numero
     if simula==False:
         t[-1].config(bg="light green")
         valor_sim=din[0]
         simula=True
     else:
         t[-1].config(bg="grey")
+        input_text.set(din[0])
+        numero=""
         simula=False
         valor_sim=0
     comas=0
@@ -140,6 +143,7 @@ Entry(ventana,font=('Arial',20,"bold"),width=21,textvariable=input_text,bd=20,in
 clear()
 
 ventana.mainloop()
+
 
 
 
