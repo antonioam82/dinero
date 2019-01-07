@@ -5,6 +5,7 @@ import pickle
 ventana=Tk()
 ventana.title("MI CONTADOR")
 ventana.geometry("392x394")
+ventana.configure(background="light blue")
 
 def clear():
     global din
@@ -68,7 +69,7 @@ def ver():
         input_text.set(din[0])
         view=True
     else:
-        t[-2].config(bg="grey")
+        t[-2].config(bg="slategray")
         if simula==True:
             input_text.set(valor_sim)
         else:
@@ -88,7 +89,7 @@ def cambiar():
         valor_sim=din[0]
         simula=True
     else:
-        t[-1].config(bg="grey")
+        t[-1].config(bg="slategray")
         input_text.set(din[0])
         numero=""
         simula=False
@@ -101,14 +102,14 @@ numero=""
 simula=False
 view=False
 comas=0
-co_b="grey"
+co_b="slategray"
 din=pickle.load(open("mi_dinero","rb"))
 valor_sim=din[0]
 t=[]
-Label(ventana,text="by doubleA",fg="red").place(x=1,y=1)
-Bsum=Button(ventana,text="SUMAR",bg="grey",width=48,height=2,command=suma).place(x=21,y=153)
+Label(ventana,text="by doubleA",fg="red",bg="light blue").place(x=1,y=1)
+Bsum=Button(ventana,text="SUMAR",bg=co_b,width=48,height=2,command=suma).place(x=21,y=153)
 t.append(Bsum)
-Bres=Button(ventana,text="RESTAR",bg="grey",width=48,height=2,command=resta).place(x=21,y=198)
+Bres=Button(ventana,text="RESTAR",bg=co_b,width=48,height=2,command=resta).place(x=21,y=198)
 t.append(Bres)
 B0=Button(ventana,text="0",bg=co_b,width=4,height=1,command=lambda:num("0")).place(x=21,y=260)
 t.append(B0)
@@ -137,7 +138,7 @@ t.append(Bd)
 Ba=Button(ventana,text="VALOR ACTUAL",bg=co_b,width=16,height=2,command=ver)
 t.append(Ba)
 Ba.place(x=247,y=325)
-bott=Button(ventana,text="SIMULACIÓN",bg="grey",width=16,height=2,command=cambiar)
+bott=Button(ventana,text="SIMULACIÓN",bg=co_b,width=16,height=2,command=cambiar)
 t.append(bott)
 bott.place(x=247,y=270)
 Entry(ventana,font=('Arial',20,"bold"),width=21,textvariable=input_text,bd=20,insertwidth=4,bg="light grey",justify="right").place(x=16,y=60)
