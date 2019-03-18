@@ -11,7 +11,6 @@ def clear():
     global din
     global numero
     global comas
-    global countr
     global modific
     global valor_original
     if modific==True:
