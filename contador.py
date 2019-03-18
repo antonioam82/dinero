@@ -11,6 +11,11 @@ def clear():
     global din
     global numero
     global comas
+    global countr
+    global modific
+    global valor_original
+    if modific==True:
+        din[0]=valor_original
     input_text.set(din[0])
     numero=""
     comas=0
@@ -34,26 +39,43 @@ def suma():
     global numero
     global simula
     global valor_sim
+    global modific
+    global countr
     if numero!="":
         if simula==False:
+            modis()
             din[0]=din[0]+float(numero)
             input_text.set(din[0])
             pickle.dump(din,open("mi_dinero","wb"))
+            countr+=1
+            modific=True
         else:
             valor_sim+=float(numero)
             input_text.set(valor_sim)
         numero=""
+        
+def modis():
+    global countr
+    global din
+    global valor_original
+    if countr==0:
+        valor_original=din[0]
         
 def resta():
     global din
     global numero
     global simula
     global valor_sim
+    global modific
+    global countr
     if numero!="":
         if simula==False:
+            modis()
             din[0]=din[0]-float(numero)
             input_text.set(din[0])
             pickle.dump(din,open("mi_dinero","wb"))
+            countr+=1
+            modific=True
         else:
             valor_sim-=float(numero)
             input_text.set(valor_sim)
@@ -99,6 +121,8 @@ def cambiar():
 
 input_text=IntVar()
 numero=""
+countr=0
+modific=False
 simula=False
 view=False
 comas=0
@@ -145,7 +169,6 @@ Entry(ventana,font=('Arial',20,"bold"),width=21,textvariable=input_text,bd=20,in
 clear()
 
 ventana.mainloop()
-
 
 
 
