@@ -16,6 +16,7 @@ def clear():
     global valor_original
     if modific==True:
         din[0]=valor_original
+        pickle.dump(din,open("mi_dinero","wb"))
     input_text.set(din[0])
     numero=""
     comas=0
@@ -169,7 +170,6 @@ Entry(ventana,font=('Arial',20,"bold"),width=21,textvariable=input_text,bd=20,in
 clear()
 
 ventana.mainloop()
-
 
 
 
